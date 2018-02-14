@@ -7,8 +7,8 @@ import './minesweeper.css';
 export default class MineSweeper extends React.Component {
     width = 200;
     height = 200;
-    cols = 10;
-    rows = 10;
+    cols = 8;
+    rows = 8;
     target = 0;
     
     state = {
@@ -35,7 +35,7 @@ export default class MineSweeper extends React.Component {
 
 
     initGame() {
-        let grid = make2DArray(10,10);
+        let grid = make2DArray(this.cols,this.rows);
         let level = this.state.level;
 
         this.target = 0;
@@ -200,8 +200,8 @@ export default class MineSweeper extends React.Component {
     gameOver(won) {
         let grid = [...this.state.grid];
 
-        for (let x = 0; x < 10; x++) {
-            for (let y = 0; y < 10; y++) {
+        for (let x = 0; x < this.cols; x++) {
+            for (let y = 0; y < this.rows; y++) {
               grid[x][y].revealed = true;
               grid[x][y].won = won;
             }

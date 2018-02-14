@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
-
+import './App.css';
 import MineSweeper from "./components/Games/MineSweeper/MineSweeper";
 
 export default class App extends React.Component {
