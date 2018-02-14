@@ -18,7 +18,6 @@ export default class MineSweeper extends React.Component {
         debug: true,
         level: 1 
     }
-    
 
     constructor(props) {
         super(props);
@@ -117,7 +116,7 @@ export default class MineSweeper extends React.Component {
         let neighborCount  = 0;
 
         if (cell.mine) {
-            this.neighborCount = -1;
+            this.neighborCount = -1;  // no need for count
             return;
         }
 
@@ -125,7 +124,6 @@ export default class MineSweeper extends React.Component {
             if (c+x < 0 ||c+x >= grid.length) {
                 continue;
             }
-               
             for(let y = -1; y <=1; y++) {
                 if (r+y <0 || r+y >= grid.length) {
                     continue;
@@ -274,7 +272,7 @@ export default class MineSweeper extends React.Component {
 
         let gameUI =  (
             <div>
-                {target} -> {this.target == 0 && <span>You won!</span>}
+                Safe cells: {target} -> {this.target == 0 && <span>You won!</span>}
                 Level: <input ref={(slider)=>{this.slider=slider}} 
                     type="range" 
                     onChange={this.onLevelSliderChange}

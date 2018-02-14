@@ -14,7 +14,6 @@ export default class Cell extends React.Component {
     }
 
     render() {
-        let index = this.props.index;
         let mine = this.props.mine;
         let revealed = this.props.revealed;
         let neighCount = this.props.neighborCount;

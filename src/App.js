@@ -14,6 +14,11 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <MineSweeper width="200px" />
+
+        <footer>Inspired from The Coding Train p5js video 
+          https://www.youtube.com/watch?v=LFU5ZlrR21E
+        </footer>
+
       </div>
     );
   }
