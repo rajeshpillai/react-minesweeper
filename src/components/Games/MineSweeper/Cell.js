@@ -31,7 +31,7 @@ export default class Cell extends React.Component {
                   <span className="mine">&#x26C7;</span>
               }
 
-              { isDebug && <span>{mine.toString()}</span> }
+              { isDebug && <span>{mine.toString().substr(0,1)}</span> }
             </div>
         );
     }
