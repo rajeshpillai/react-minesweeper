@@ -1,7 +1,16 @@
 .header {
-	font-size: 1.8em;
+    font-size: 1.8em;
+    width: 100%;
+    background-color: pink;
 }
 
+.board {
+
+}
+
+.settings{
+    background-color: #CFD8DC;
+}
 .reset{
 	
 }

@@ -294,18 +294,9 @@ export default class MineSweeper extends React.Component {
         });
 
         let gameUI =  (
-            <div>
-                Safe cells: {target} -> {this.target == 0 && <span>You won!</span>}
-                Size: <input type="number" step="2" value={this.state.size} min="4" max="16"
-                     onChange = {this.onSizeChange}/>
-
-                Level: <input ref={(slider)=>{this.slider=slider}} 
-                    type="range" 
-                    onChange={this.onLevelSliderChange}
-                    value={this.state.level}
-                    min="1" max="9" step="1" /> {this.state.level}
-
-                <header className="header">Minesweepr classic 
+        <React.Fragment>
+            <div className="row">
+                <header className="col-12 header">Minesweepr classic 
                         <span className="reset" title="click to start the game..."
                             onClick={(e)=>{this.onReset(e)}}>{smiley}
                         </span>
@@ -315,14 +306,43 @@ export default class MineSweeper extends React.Component {
                             onChange={this.onDebug} /> debug
                         </label>
                 </header>
-                <table>
-                    <tbody>
-                        {rows}
-                    </tbody>
-                </table>
-                <footer>press alt+shift+r (to replay)->click 🙂 on the header to start again.</footer>
-
             </div>
+           
+            <div className="row">
+                <div className="col-md-8 board">
+                    <table>
+                        <tbody>
+                            {rows}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="col-md-4 settings">
+                    <div className="row">
+                        <div className="col-12">
+                            Safe cells: {target} {this.target == 0 && <span>You won!</span>}
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            Size: <input type="number" step="2" value={this.state.size} min="4" max="16"
+                                onChange = {this.onSizeChange}/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            Level: <input ref={(slider)=>{this.slider=slider}} 
+                                type="range" 
+                                onChange={this.onLevelSliderChange}
+                                value={this.state.level}
+                                min="1" max="9" step="1" /> {this.state.level}
+                        </div>
+                    </div>
+                </div>
+             </div>
+            <footer>press alt+shift+r (to replay)->click 🙂 on the header to start again.</footer>
+        </React.Fragment>
+            
         );
 
         let gameView = loading ? "<h2>loading...</h2>" : gameUI;

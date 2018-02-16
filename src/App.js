@@ -11,11 +11,10 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         <MineSweeper width="200px" />
-
         <footer>Inspired from The Coding Train p5js video 
-          https://www.youtube.com/watch?v=LFU5ZlrR21E
+          <a href="https://www.youtube.com/watch?v=LFU5ZlrR21E">The Coding Train</a>
         </footer>
       </div>
     );
