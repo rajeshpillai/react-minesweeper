@@ -13,7 +13,8 @@ export default class MineSweeper extends React.Component {
     
     state = {
         grid:  [],
-        won: false,
+        won: null,
+        inprogress: false,
         target: 0,
         debug: true,
         level: 1 
@@ -71,7 +72,8 @@ export default class MineSweeper extends React.Component {
         }
         this.logState({
             grid,
-            won: true
+            won: null,
+            inprogress: true
         }, ()=> {
             this.logState({
                 loading: false,
@@ -216,7 +218,10 @@ export default class MineSweeper extends React.Component {
         
         if (cell.mine) {
             this.gameOver(false);
-            //alert("You lost..");
+            this.logState({
+                won: false
+            });
+                //alert("You lost..");
             return;
         }
         this.logState({
@@ -243,9 +248,10 @@ export default class MineSweeper extends React.Component {
     render() {
         let grid = this.state.grid;
         let won = this.state.won;
+        let inprogress = this.state.inprogress;
         let loading = this.state.loading;
         let target = this.state.target;
-        let smiley = won ? "🙂" : "🙁";
+        let smiley = (won == null || won == true) ? "🙂" : "🙁";
         let isDebug = this.state.debug;
 
         var rows = grid.map((item,i) =>{
