@@ -16,8 +16,9 @@ export default class MineSweeper extends React.Component {
         won: null,
         inprogress: false,
         target: 0,
-        debug: true,
-        level: 1 
+        debug: false,
+        level: 1 ,
+        size: 8,
     }
 
     constructor(props) {
@@ -35,6 +36,9 @@ export default class MineSweeper extends React.Component {
 
 
     initGame() {
+        this.cols = this.state.size;
+        this.rows = this.state.size;
+
         let grid = make2DArray(this.cols,this.rows);
         let level = this.state.level;
 
@@ -131,7 +135,7 @@ export default class MineSweeper extends React.Component {
                     continue;
                 }
                 let ncell = grid[c+x][r+y];
-                if (!ncell.revealed) {
+                if (!ncell && !ncell.revealed) {
                     this.reveal(ncell, c+x, r+y);
                 }
             }
@@ -242,7 +246,18 @@ export default class MineSweeper extends React.Component {
     }
 
     onLevelSliderChange = (e) => {
-        this.logState({level: e.target.value});
+        this.logState({level: parseInt(e.target.value)}, () => {
+            this.initGame();
+        });
+    }
+
+    onSizeChange = (e) => {
+        this.logState({
+            size: parseInt(e.target.value,10)
+        }, () => {
+            this.initGame();
+        });
+
     }
 
     render() {
@@ -253,6 +268,8 @@ export default class MineSweeper extends React.Component {
         let target = this.state.target;
         let smiley = (won == null || won == true) ? "🙂" : "🙁";
         let isDebug = this.state.debug;
+
+        {{ loading && <h2>loading...</h2>}}
 
         var rows = grid.map((item,i) =>{
             var entry = item.map((element,j) => {
@@ -279,18 +296,24 @@ export default class MineSweeper extends React.Component {
         let gameUI =  (
             <div>
                 Safe cells: {target} -> {this.target == 0 && <span>You won!</span>}
+                Size: <input type="number" step="2" value={this.state.size} min="4" max="16"
+                     onChange = {this.onSizeChange}/>
+
                 Level: <input ref={(slider)=>{this.slider=slider}} 
                     type="range" 
                     onChange={this.onLevelSliderChange}
                     value={this.state.level}
                     min="1" max="9" step="1" /> {this.state.level}
+
                 <header className="header">Minesweepr classic 
                         <span className="reset" title="click to start the game..."
                             onClick={(e)=>{this.onReset(e)}}>{smiley}
                         </span>
+                        <label className="checkbox">
                         <input type="checkbox" 
                             checked={isDebug}
                             onChange={this.onDebug} /> debug
+                        </label>
                 </header>
                 <table>
                     <tbody>
