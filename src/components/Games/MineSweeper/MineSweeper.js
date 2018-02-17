@@ -10,7 +10,7 @@ export default class MineSweeper extends React.Component {
     cols = 8;
     rows = 8;
     target = 0;
-    
+    mines = 0;
     state = {
         grid:  [],
         won: null,
@@ -36,6 +36,7 @@ export default class MineSweeper extends React.Component {
 
 
     initGame() {
+        this.mines = 0;
         this.cols = this.state.size;
         this.rows = this.state.size;
 
@@ -66,6 +67,8 @@ export default class MineSweeper extends React.Component {
 
                 if (!isMine) {
                     this.target++;
+                } else {
+                    this.mines++;
                 }
             }
         }
@@ -318,6 +321,11 @@ export default class MineSweeper extends React.Component {
                 </div>
 
                 <div className="col-md-4 settings">
+                   <div className="row">
+                        <div className="col-12">
+                            Mines: {this.mines} 
+                         </div>
+                    </div>
                     <div className="row">
                         <div className="col-12">
                             Safe cells: {target} {this.target == 0 && <span>You won!</span>}
