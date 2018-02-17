@@ -125,6 +125,7 @@ export default class MineSweeper extends React.Component {
         let neighborCount  = 0;
 
         if (cell.mine) {
+            console.log("mine found...");
             this.neighborCount = -1;  // no need for count
             return;
         }
@@ -138,7 +139,7 @@ export default class MineSweeper extends React.Component {
                     continue;
                 }
                 let ncell = grid[c+x][r+y];
-                if (!ncell && !ncell.revealed) {
+                if (ncell && !ncell.revealed) {
                     this.reveal(ncell, c+x, r+y);
                 }
             }
@@ -160,6 +161,7 @@ export default class MineSweeper extends React.Component {
         }
 
         grid[x][y]= cell;
+        console.log("cell.neighCount:", cell.neighborCount);
         if (cell.neighborCount == 0) {
             this.floodFill(grid, x, y);
         }
