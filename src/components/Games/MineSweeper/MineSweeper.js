@@ -305,7 +305,7 @@ export default class MineSweeper extends React.Component {
         let gameUI =  (
         <React.Fragment>
             <div className="row">
-                <header className="col-sm-12 header">
+                <header className="col header">
                     <h3 className="header-title">Minesweeper Classic 
                     <span className="pull-right">
                             <label className="checkbox">
@@ -316,7 +316,7 @@ export default class MineSweeper extends React.Component {
                            </span>
                            </h3> 
                        <h6 className="text-center">
-                            <span className="icon-style reset" title="click to start the game..."
+                            <span className="smiley reset" title="click to start the game..."
                                 onClick={(e)=>{this.onReset(e)}}>{smiley}
                             </span>
                        </h6>
@@ -325,14 +325,13 @@ export default class MineSweeper extends React.Component {
            
             <div className="row">
                 <div className="board">
-                        <div className="table-responsive">
-                            <table className="table">
-                                <tbody>
-                                    {rows}
-                                </tbody>
-                            </table>    
-                        </div>
-                    
+                    <div className="table-responsive">
+                        <table className="table">
+                            <tbody>
+                                {rows}
+                            </tbody>
+                        </table>    
+                    </div>
                 </div>
                 <div className="settings">
                    <div className="row">
@@ -361,9 +360,8 @@ export default class MineSweeper extends React.Component {
                                 value={this.state.level}
                                 min="1" max="9" step="1" /> {this.state.level}</div>
                         </div>
+                    </div>
                 </div>
-                </div>
-               
              </div>
             <footer>
                 <div className="row">
