@@ -11,7 +11,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <MineSweeper width="200px" />
         <footer>Inspired from The Coding Train p5js video 
           <a href="https://www.youtube.com/watch?v=LFU5ZlrR21E">The Coding Train</a>

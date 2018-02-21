@@ -49,7 +49,8 @@ export default class MineSweeper extends React.Component {
         this.logState({
             loading: true,
             level: level,
-            over: false
+            over: false,
+            won: null
         });
         
         for(let x = 0; x < this.cols; x++) {
@@ -169,7 +170,7 @@ export default class MineSweeper extends React.Component {
         this.logState({
             grid,
             target: this.target,
-            won: this.target <= 0
+            won: this.target <= 0 ? true : null
         });
     }
 
@@ -234,7 +235,8 @@ export default class MineSweeper extends React.Component {
             return;
         }
         this.logState({
-            target: this.state.target -1
+            target: this.state.target -1,
+            won: null
         });
         console.log("neighbour: ", cell.neighborCount);
         this.reveal(cell, cell.position.x, cell.position.y);
@@ -272,7 +274,9 @@ export default class MineSweeper extends React.Component {
         let loading = this.state.loading;
         let target = this.state.target;
         let smiley = (won == null || won == true) ? "🙂" : "🙁";
+        console.log(this.state,`win: ${won}`);
         let isDebug = this.state.debug;
+
 
         {{ loading && <h2>loading...</h2>}}
 
@@ -301,56 +305,79 @@ export default class MineSweeper extends React.Component {
         let gameUI =  (
         <React.Fragment>
             <div className="row">
-                <header className="col-12 header">Minesweepr classic 
-                        <span className="reset" title="click to start the game..."
-                            onClick={(e)=>{this.onReset(e)}}>{smiley}
-                        </span>
-                        <label className="checkbox">
-                        <input type="checkbox" 
-                            checked={isDebug}
-                            onChange={this.onDebug} /> debug
-                        </label>
+                <header className="col-sm-12 header">
+                    <h3 className="header-title">Minesweeper Classic 
+                    <span className="pull-right">
+                            <label className="checkbox">
+                                    <input type="checkbox" 
+                                    checked={isDebug}
+                                    onChange={this.onDebug} /> debug
+                                </label> 
+                           </span>
+                           </h3> 
+                       <h6 className="text-center">
+                            <span className="icon-style reset" title="click to start the game..."
+                                onClick={(e)=>{this.onReset(e)}}>{smiley}
+                            </span>
+                       </h6>
                 </header>
             </div>
            
             <div className="row">
-                <div className="col-md-8 board">
-                    <table>
-                        <tbody>
-                            {rows}
-                        </tbody>
-                    </table>
+                <div className="col-sm-8 col-md-8 board">
+                    <div className="col-sm-12 col-md-12 col-lg-6 offset-lg-3">
+                        <div className="table-responsive">
+                            <table className="table">
+                                <tbody>
+                                    {rows}
+                                </tbody>
+                            </table>    
+                        </div>
+                        </div>
+                    
                 </div>
-
-                <div className="col-md-4 settings">
+                <div className="col-sm-4 col-md-4 settings">
                    <div className="row">
-                        <div className="col-12">
-                            Mines: {this.mines} 
+                        <div className="col-6">
+                            <div>Mines</div>
+                            <div>{this.mines}</div>
                          </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-12">
-                            Safe cells: {target} {this.target == 0 && <span>You won!</span>}
+                         <div className="col-6">
+                             <div>Safe cells</div>
+                             <div>{target} {this.target == 0 && <span>You won!</span>}</div>
+                            {/* Safe cells: {target} {this.target == 0 && <span>You won!</span>} */}
                         </div>
                     </div>
+                   <hr className="mbt5 white" />
                     <div className="row">
-                        <div className="col-12">
-                            Size: <input type="number" step="2" value={this.state.size} min="4" max="16"
+                        <div className="col-6">
+                            <div>Size</div>
+                            <div>
+                                <input type="number" step="2" value={this.state.size} min="4" max="16"
                                 onChange = {this.onSizeChange}/>
+                            </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-12">
-                            Level: <input ref={(slider)=>{this.slider=slider}} 
+                   
+                        <div className="col-6">
+                            <div>Level</div>
+                            <div><input ref={(slider)=>{this.slider=slider}} 
                                 type="range" 
                                 onChange={this.onLevelSliderChange}
                                 value={this.state.level}
-                                min="1" max="9" step="1" /> {this.state.level}
+                                min="1" max="9" step="1" /> {this.state.level}</div>
                         </div>
                     </div>
                 </div>
+
+               
              </div>
-            <footer>press alt+shift+r (to replay)->click 🙂 on the header to start again.</footer>
+            <footer>
+                <div className="row">
+                    <div className="col-sm-12">
+                    Press alt+shift+r (to replay)->click 🙂 on the header to start again.
+                    </div>
+                </div>
+            </footer>
         </React.Fragment>
             
         );
