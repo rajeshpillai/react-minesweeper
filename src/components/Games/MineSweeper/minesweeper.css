@@ -5,14 +5,11 @@
 }
 
 .board {
-
+    padding:0;
 }
 
 .settings{
     background-color: #CFD8DC;
-}
-.reset{
-	
 }
 .cell {
     width: 50px;
