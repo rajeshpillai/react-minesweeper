@@ -324,8 +324,7 @@ export default class MineSweeper extends React.Component {
             </div>
            
             <div className="row">
-                <div className="col-sm-8 col-md-8 board">
-                    <div className="col-sm-12 col-md-12 col-lg-6 offset-lg-3">
+                <div className="board">
                         <div className="table-responsive">
                             <table className="table">
                                 <tbody>
@@ -333,24 +332,20 @@ export default class MineSweeper extends React.Component {
                                 </tbody>
                             </table>    
                         </div>
-                        </div>
                     
                 </div>
-                <div className="col-sm-4 col-md-4 settings">
+                <div className="settings">
                    <div className="row">
-                        <div className="col-6">
+                        <div className="col">
                             <div>Mines</div>
                             <div>{this.mines}</div>
                          </div>
-                         <div className="col-6">
+                         <div className="col">
                              <div>Safe cells</div>
                              <div>{target} {this.target == 0 && <span>You won!</span>}</div>
                             {/* Safe cells: {target} {this.target == 0 && <span>You won!</span>} */}
                         </div>
-                    </div>
-                   <hr className="mbt5 white" />
-                    <div className="row">
-                        <div className="col-6">
+                        <div className="col">
                             <div>Size</div>
                             <div>
                                 <input type="number" step="2" value={this.state.size} min="4" max="16"
@@ -358,7 +353,7 @@ export default class MineSweeper extends React.Component {
                             </div>
                         </div>
                    
-                        <div className="col-6">
+                        <div className="col">
                             <div>Level</div>
                             <div><input ref={(slider)=>{this.slider=slider}} 
                                 type="range" 
@@ -366,9 +361,8 @@ export default class MineSweeper extends React.Component {
                                 value={this.state.level}
                                 min="1" max="9" step="1" /> {this.state.level}</div>
                         </div>
-                    </div>
                 </div>
-
+                </div>
                
              </div>
             <footer>

@@ -8,17 +8,18 @@
     color: rgb(13, 7, 105);
 }
 .board {
-    padding:0;
-    margin-top: 10px;
+    margin: 5em auto;
 }
 
 .settings{
-    /* background-color: #CFD8DC; */
     background-color: #636465;
+    padding-left: 10px;
     color: #fff;
     font-size: 13px;
     font-weight: normal;
-    padding: 10px;
+    position: absolute;
+    left:0;
+    right:0;
 }
 table {
     border-collapse: collapse;
@@ -29,7 +30,8 @@ table {
     border-top: 0px solid #dee2e6;
 }
 .cell {
-    height: 41px;
+    height: 2.5em;
+    width: 2.5em;
     border: 1px solid black;
     background-color: lightgray;
     text-align: center;
@@ -87,8 +89,10 @@ label.checkbox {
 input[type='checkbox'] {
     background: #fff;
 }
+
 footer {
     font-size: 12px;
+    margin: 10px auto;
 }
 
 @media(min-width: 768px) and (max-width: 992px) {
