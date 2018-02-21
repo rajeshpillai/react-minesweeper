@@ -1,5 +1,4 @@
 .header {
-    font-size: 1.8em;
     width: 100%;
     background-color: pink;
 }
@@ -30,13 +29,13 @@ table {
     border-top: 0px solid #dee2e6;
 }
 .cell {
-    width: 41px;
     height: 41px;
     border: 1px solid black;
     background-color: lightgray;
     text-align: center;
     padding: 0;
     margin: 0;
+    
     font-size: 1.5em;
     /* padding: .75rem; */
     /* padding: .5rem; */
