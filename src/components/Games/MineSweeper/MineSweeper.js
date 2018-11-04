@@ -285,7 +285,7 @@ export default class MineSweeper extends React.Component {
              let mine = element.random < 0.5 ? true: false;
              let flag = element.won;
               return (
-                  <td  key={i+j} >
+                  <td key={i + j} >
                     <Cell  
                      onCellClick = {(e)=>{this.onCellClick(e)}}
                      revealed = {element.revealed}
@@ -302,77 +302,78 @@ export default class MineSweeper extends React.Component {
              );
         });
 
-        let gameUI =  (
-        <React.Fragment>
-            <div className="row">
-                <header className="col header">
-                    <h3 className="header-title">Minesweeper Classic 
-                    <span className="pull-right">
-                            <label className="checkbox">
-                                    <input type="checkbox" 
-                                    checked={isDebug}
-                                    onChange={this.onDebug} /> debug
-                                </label> 
-                           </span>
-                           </h3> 
-                       <h6 className="text-center">
-                            <span className="smiley reset" title="click to start the game..."
-                                onClick={(e)=>{this.onReset(e)}}>{smiley}
-                            </span>
-                       </h6>
-                </header>
+        let gameUI = <React.Fragment>
+            {/* Header - Start */}
+            <header className="header">
+              <div className="row">
+                <div className="col flex-wrapper">
+                  <span className="header-title">
+                    Minesweeper Classic{" "}
+                  </span>
+                </div>
+                <div className="col flex-wrapper">
+                  <div className=" smiley reset" title="click to start the game..." onClick={e => {
+                      this.onReset(e);
+                    }}>
+                    {smiley}
+                  </div>
+                </div>
+                <div className="col flex-wrapper">
+                  <div class="checkbox-btn">
+                    <input type="checkbox" class="chkBox" checked={isDebug} onChange={this.onDebug} />
+                    <div>
+                      <span className="slide" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </header>
+            {/* Header - End */}
+
+            <div className="info-bar">
+              <div className="row">
+                <div className="col flex-wrapper-info-bar">
+                  <label className="col-form-label">Mines</label>
+                  <div className="info-value">{this.mines}</div>
+                </div>
+                <div className="col flex-wrapper-info-bar">
+                  <label className="col-form-label">Safe cells</label>
+                  <div className="info-value">
+                    {target} {this.target == 0 && <span>You won!</span>}
+                  </div>
+                  {/* Safe cells: {target} {this.target == 0 && <span>You won!</span>} */}
+                </div>
+                <div className="col flex-wrapper-info-bar">
+                  <label className="col-form-label">Size</label>
+                  <div className="info-value">
+                    <input type="number" step="2" value={this.state.size} min="4" max="16" onChange={this.onSizeChange} />
+                  </div>
+                </div>
+
+                <div className="col flex-wrapper-info-bar">
+                  <label className="col-form-label">Level</label>
+                  <div className="info-value">
+                    <input ref={slider => {
+                        this.slider = slider;
+                      }} type="range" onChange={this.onLevelSliderChange} value={this.state.level} min="1" max="9" step="1" /> {this.state.level}
+                  </div>
+                </div>
+              </div>
             </div>
-           
+
             <div className="row">
-                <div className="board">
-                    <div className="table-responsive">
-                        <table className="table">
-                            <tbody>
-                                {rows}
-                            </tbody>
-                        </table>    
-                    </div>
+              <div className="board">
+                <div className="table-responsive">
+                  <table className="table">
+                    <tbody>{rows}</tbody>
+                  </table>
                 </div>
-                <div className="settings">
-                   <div className="row">
-                        <div className="col">
-                            <div>Mines</div>
-                            <div>{this.mines}</div>
-                         </div>
-                         <div className="col">
-                             <div>Safe cells</div>
-                             <div>{target} {this.target == 0 && <span>You won!</span>}</div>
-                            {/* Safe cells: {target} {this.target == 0 && <span>You won!</span>} */}
-                        </div>
-                        <div className="col">
-                            <div>Size</div>
-                            <div>
-                                <input type="number" step="2" value={this.state.size} min="4" max="16"
-                                onChange = {this.onSizeChange}/>
-                            </div>
-                        </div>
-                   
-                        <div className="col">
-                            <div>Level</div>
-                            <div><input ref={(slider)=>{this.slider=slider}} 
-                                type="range" 
-                                onChange={this.onLevelSliderChange}
-                                value={this.state.level}
-                                min="1" max="9" step="1" /> {this.state.level}</div>
-                        </div>
-                    </div>
-                </div>
-             </div>
-            <footer>
-                <div className="row">
-                    <div className="col-sm-12">
-                    Press alt+shift+r (to replay)->click 🙂 on the header to start again.
-                    </div>
-                </div>
-            </footer>
-        </React.Fragment>
-            
-        );
+              </div>
+            </div>
+
+           
+         
+          </React.Fragment>;
 
         let gameView = loading ? "<h2>loading...</h2>" : gameUI;
 
