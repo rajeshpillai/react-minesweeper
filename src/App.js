@@ -16,7 +16,7 @@ export default class App extends React.Component {
         <div className="container">
           <div className="text-center">
             <div className="text-muted text-center">
-              click đ on the header to start again.
+              click 🙂 on the header to start again.
               </div>
             <div>
               Inspired from The Coding Train p5js video
