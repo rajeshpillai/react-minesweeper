@@ -1,8 +1,10 @@
 
 import React from 'react';
 import Cell from './Cell';
+import Header from './Header';
 import { make2DArray } from './utils.js';
 import './minesweeper.css';
+
 
 export default class MineSweeper extends React.Component {
 
@@ -228,35 +230,6 @@ export default class MineSweeper extends React.Component {
 
     }
 
-    Header = ({ smiley, isDebug, onDebug, onReset }) => {
-        return (
-            <header className="header">
-                <div className="row">
-                    <div className="col flex-wrapper">
-                        <span className="header-title">
-                            Minesweeper Classic{" "}
-                        </span>
-                    </div>
-                    <div className="col flex-wrapper">
-                        <div className=" smiley reset" title="click to start the game..."
-                            onClick={e => {
-                                onReset(e);
-                            }}>
-                            {smiley}
-                        </div>
-                    </div>
-                    <div className="col flex-wrapper">
-                        <div className="checkbox-btn">
-                            <input type="checkbox" className="chkBox" checked={isDebug} onChange={onDebug} />
-                            <div>
-                                <span className="slide" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        );
-    }
 
     render() {
         let grid = this.state.grid;
@@ -293,8 +266,7 @@ export default class MineSweeper extends React.Component {
         });
 
         let gameUI = <React.Fragment>
-            {/* Header - Start */}
-            <this.Header smiley={smiley} isDebug={isDebug} onDebug={this.onDebug}
+            <Header smiley={smiley} isDebug={isDebug} onDebug={this.onDebug}
                 onReset={this.onReset}
             />
 
@@ -309,7 +281,6 @@ export default class MineSweeper extends React.Component {
                         <div className="info-value">
                             {target} {this.target == 0 && <span>You won!</span>}
                         </div>
-                        {/* Safe cells: {target} {this.target == 0 && <span>You won!</span>} */}
                     </div>
                     <div className="col flex-wrapper-info-bar">
                         <label className="col-form-label">Size</label>
