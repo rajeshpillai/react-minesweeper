@@ -26,11 +26,6 @@ export default class MineSweeper extends React.Component {
     }
 
     componentDidMount() {
-        document.onkeydown = (e) => {
-            if (e.altKey && e.shiftKey && e.which === 82) { // ALT+SHIFT+R(eplay)
-                this.replay();
-            }
-        }
         this.initGame();
     }
 
@@ -46,7 +41,7 @@ export default class MineSweeper extends React.Component {
         this.target = 0;
 
 
-        this.logState({
+        this.setState({
             loading: true,
             level: level,
             over: false,
@@ -78,12 +73,12 @@ export default class MineSweeper extends React.Component {
                 this.countMines(grid, x, y);
             }
         }
-        this.logState({
+        this.setState({
             grid,
             won: null,
             inprogress: true
         }, () => {
-            this.logState({
+            this.setState({
                 loading: false,
                 target: this.target
             })
@@ -167,45 +162,45 @@ export default class MineSweeper extends React.Component {
             this.floodFill(grid, x, y);
         }
 
-        this.logState({
+        this.setState({
             grid,
             target: this.target,
             won: this.target <= 0 ? true : null
         });
     }
 
-    _log = [];
-    logState = (newState, onUpdate) => {
-        // remember the old state in a clone
-        if (this._log.length === 0) {
-            this._log.push(this.state);
-        }
-        this._log.push(newState);
-        if (onUpdate) {
-            this.setState(
-                newState, onUpdate);
-        } else {
-            this.setState(
-                newState
-            );
-        }
-    }
+    // _log = [];
+    // logState = (newState, onUpdate) => {
+    //     // remember the old state in a clone
+    //     if (this._log.length === 0) {
+    //         this._log.push(this.state);
+    //     }
+    //     this._log.push(newState);
+    //     if (onUpdate) {
+    //         this.setState(
+    //             newState, onUpdate);
+    //     } else {
+    //         this.setState(
+    //             newState
+    //         );
+    //     }
+    // }
 
-    replay = () => {
-        console.log("replaying...", this._log);
-        if (this._log.length === 0) {
-            console.warn("No state to replay yet");
-            return;
-        }
-        var idx = -1;
-        var interval = setInterval(() => {
-            idx++;
-            if (idx === this._log.length - 1) {
-                clearInterval(interval);
-            }
-            this.setState(this._log[idx]);
-        }, 1000);
-    }
+    // replay = () => {
+    //     console.log("replaying...", this._log);
+    //     if (this._log.length === 0) {
+    //         console.warn("No state to replay yet");
+    //         return;
+    //     }
+    //     var idx = -1;
+    //     var interval = setInterval(() => {
+    //         idx++;
+    //         if (idx === this._log.length - 1) {
+    //             clearInterval(interval);
+    //         }
+    //         this.setState(this._log[idx]);
+    //     }, 1000);
+    // }
 
     gameOver(won) {
         let grid = [...this.state.grid];
@@ -216,7 +211,7 @@ export default class MineSweeper extends React.Component {
                 grid[x][y].won = won;
             }
         }
-        this.logState({
+        this.setState({
             grid,
             won: won,
             over: true
@@ -228,13 +223,13 @@ export default class MineSweeper extends React.Component {
 
         if (cell.mine) {
             this.gameOver(false);
-            this.logState({
+            this.setState({
                 won: false
             });
             //alert("You lost..");
             return;
         }
-        this.logState({
+        this.setState({
             target: this.state.target - 1,
             won: null
         });
@@ -247,19 +242,19 @@ export default class MineSweeper extends React.Component {
     }
 
     onDebug = () => {
-        this.logState({
+        this.setState({
             debug: !this.state.debug
         })
     }
 
     onLevelSliderChange = (e) => {
-        this.logState({ level: parseInt(e.target.value) }, () => {
+        this.setState({ level: parseInt(e.target.value) }, () => {
             this.initGame();
         });
     }
 
     onSizeChange = (e) => {
-        this.logState({
+        this.setState({
             size: parseInt(e.target.value, 10)
         }, () => {
             this.initGame();
@@ -319,8 +314,8 @@ export default class MineSweeper extends React.Component {
                         </div>
                     </div>
                     <div className="col flex-wrapper">
-                        <div class="checkbox-btn">
-                            <input type="checkbox" class="chkBox" checked={isDebug} onChange={this.onDebug} />
+                        <div className="checkbox-btn">
+                            <input type="checkbox" className="chkBox" checked={isDebug} onChange={this.onDebug} />
                             <div>
                                 <span className="slide" />
                             </div>

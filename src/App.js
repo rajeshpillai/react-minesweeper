@@ -11,24 +11,23 @@ export default class App extends React.Component {
 
   render() {
     return <React.Fragment>
-        <MineSweeper />
-        <footer className="footer">
-          <div className="container">
+      <MineSweeper />
+      <footer className="footer">
+        <div className="container">
           <div className="text-center">
             <div className="text-muted text-center">
-                Press alt+shift+r (to replay)->click đ on the header to
-            start again.
+              click đ on the header to start again.
               </div>
-                <div>
-                  Inspired from The Coding Train p5js video
+            <div>
+              Inspired from The Coding Train p5js video
                   <a href="https://www.youtube.com/watch?v=LFU5ZlrR21E">
-                    The Coding Train
+                The Coding Train
                   </a>
-                </div>
             </div>
           </div>
-        </footer>
-      </React.Fragment>;
+        </div>
+      </footer>
+    </React.Fragment>;
   }
 }
 
