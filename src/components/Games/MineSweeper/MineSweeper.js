@@ -203,7 +203,7 @@ export default class MineSweeper extends React.Component {
         this.reveal(cell, cell.position.x, cell.position.y);
     }
 
-    onReset() {
+    onReset = () => {
         this.initGame();
     }
 
@@ -226,6 +226,36 @@ export default class MineSweeper extends React.Component {
             this.initGame();
         });
 
+    }
+
+    Header = ({ smiley, isDebug, onDebug, onReset }) => {
+        return (
+            <header className="header">
+                <div className="row">
+                    <div className="col flex-wrapper">
+                        <span className="header-title">
+                            Minesweeper Classic{" "}
+                        </span>
+                    </div>
+                    <div className="col flex-wrapper">
+                        <div className=" smiley reset" title="click to start the game..."
+                            onClick={e => {
+                                onReset(e);
+                            }}>
+                            {smiley}
+                        </div>
+                    </div>
+                    <div className="col flex-wrapper">
+                        <div className="checkbox-btn">
+                            <input type="checkbox" className="chkBox" checked={isDebug} onChange={onDebug} />
+                            <div>
+                                <span className="slide" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        );
     }
 
     render() {
@@ -264,31 +294,9 @@ export default class MineSweeper extends React.Component {
 
         let gameUI = <React.Fragment>
             {/* Header - Start */}
-            <header className="header">
-                <div className="row">
-                    <div className="col flex-wrapper">
-                        <span className="header-title">
-                            Minesweeper Classic{" "}
-                        </span>
-                    </div>
-                    <div className="col flex-wrapper">
-                        <div className=" smiley reset" title="click to start the game..." onClick={e => {
-                            this.onReset(e);
-                        }}>
-                            {smiley}
-                        </div>
-                    </div>
-                    <div className="col flex-wrapper">
-                        <div className="checkbox-btn">
-                            <input type="checkbox" className="chkBox" checked={isDebug} onChange={this.onDebug} />
-                            <div>
-                                <span className="slide" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            {/* Header - End */}
+            <this.Header smiley={smiley} isDebug={isDebug} onDebug={this.onDebug}
+                onReset={this.onReset}
+            />
 
             <div className="info-bar">
                 <div className="row">
