@@ -51,7 +51,6 @@ export default class MineSweeper extends React.Component {
                 let m = Math.random(1);
                 let isMine = m < (level * 10 / 100) ? true : false; // 70% of blocks has mines
                 grid[x][y] = {
-                    random: m,
                     mine: isMine,
                     position: {
                         x: x,
@@ -240,7 +239,6 @@ export default class MineSweeper extends React.Component {
 
         var rows = grid.map((item, i) => {
             var entry = item.map((element, j) => {
-                let mine = element.random < 0.5 ? true : false;
                 let flag = element.won;
                 return (
                     <td key={i + j} >
