@@ -5,24 +5,24 @@ import { make2DArray } from './utils.js';
 import './minesweeper.css';
 
 export default class MineSweeper extends React.Component {
-    width = 200;
-    height = 200;
-    cols = 8;
-    rows = 8;
-    target = 0;
-    mines = 0;
-    state = {
-        grid: [],
-        won: null,
-        inprogress: false,
-        target: 0,
-        debug: false,
-        level: 1,
-        size: 8,
-    }
 
     constructor(props) {
         super(props);
+        this.width = 200;
+        this.height = 200;
+        this.cols = 8;
+        this.rows = 8;
+        this.target = 0;
+        this.mines = 0;
+        this.state = {
+            grid: [],
+            won: null,
+            inprogress: false,
+            target: 0,
+            debug: false,
+            level: 1,
+            size: 8,
+        }
     }
 
     componentDidMount() {
@@ -34,12 +34,10 @@ export default class MineSweeper extends React.Component {
         this.mines = 0;
         this.cols = this.state.size;
         this.rows = this.state.size;
+        this.target = 0;
 
         let grid = make2DArray(this.cols, this.rows);
         let level = this.state.level;
-
-        this.target = 0;
-
 
         this.setState({
             loading: true,
@@ -91,7 +89,6 @@ export default class MineSweeper extends React.Component {
         let neighborCount = 0;
 
         if (cell.mine) {
-            this.neighborCount = -1;
             return;
         }
 
@@ -122,7 +119,6 @@ export default class MineSweeper extends React.Component {
 
         if (cell.mine) {
             console.log("mine found...");
-            this.neighborCount = -1;  // no need for count
             return;
         }
 
@@ -168,39 +164,6 @@ export default class MineSweeper extends React.Component {
             won: this.target <= 0 ? true : null
         });
     }
-
-    // _log = [];
-    // logState = (newState, onUpdate) => {
-    //     // remember the old state in a clone
-    //     if (this._log.length === 0) {
-    //         this._log.push(this.state);
-    //     }
-    //     this._log.push(newState);
-    //     if (onUpdate) {
-    //         this.setState(
-    //             newState, onUpdate);
-    //     } else {
-    //         this.setState(
-    //             newState
-    //         );
-    //     }
-    // }
-
-    // replay = () => {
-    //     console.log("replaying...", this._log);
-    //     if (this._log.length === 0) {
-    //         console.warn("No state to replay yet");
-    //         return;
-    //     }
-    //     var idx = -1;
-    //     var interval = setInterval(() => {
-    //         idx++;
-    //         if (idx === this._log.length - 1) {
-    //             clearInterval(interval);
-    //         }
-    //         this.setState(this._log[idx]);
-    //     }, 1000);
-    // }
 
     gameOver(won) {
         let grid = [...this.state.grid];
